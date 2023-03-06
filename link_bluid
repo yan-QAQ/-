@@ -1,0 +1,43 @@
+#include<iostream>
+#include<cstdlib>
+using namespace std;
+typedef struct Node{
+	int data;
+	struct Node* next;
+}node,*Linklist;
+void head_insert(node* l){
+	Linklist p;
+	int d;
+	while(cin>>d){
+		p=(Linklist)malloc(sizeof(node));
+		p->data=d;
+		p->next=l->next;
+		l->next=p;
+	}
+}
+void tail_insert(Linklist l){
+	Linklist rear,p;
+	rear=(Linklist)malloc(sizeof(node));
+	int d;
+	rear=l;
+	while(cin>>d){
+		p=(Linklist)malloc(sizeof(node));
+		p->data=d;
+		rear->next=p;
+		rear=p;
+	}
+	p->next=NULL;
+}
+int main(){
+	node l;
+	l.next=NULL;
+	Linklist p=(Linklist)malloc(sizeof(node));
+	//head_insert(&l);
+	tail_insert(&l);
+	p=l.next;
+	while(p){
+		cout<<p->data<<" ";
+		p=p->next;
+	}
+	return 0;
+} 
