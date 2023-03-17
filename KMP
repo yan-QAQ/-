@@ -1,5 +1,5 @@
-//串的模式匹配算法 
-//KMP算法 
+//串的模式匹配算法
+//KMP算法
 #include<iostream>
 #include<cstring>
 #define N 100
@@ -17,8 +17,8 @@ int main(){
 }
 int Index(string s,string t,int pos){
 	int i=pos,j=0;
-	while(i<s.length()||j<t.length()){
-		if(s[i]==t[j]){
+	while(i<(int)s.length()&&j<(int)t.length()){
+		if(j==-1||s[i]==t[j]){//如果字符相等或不存在k值只能从头开始
 			++i,++j;
 		}
 		else {
@@ -32,10 +32,10 @@ int Index(string s,string t,int pos){
 	return 0;
 }
 void get_next(string t,int next[]){
-	int i=0;next[i]=0;
-	int j=0;
+	int i=0;next[0]=-1;
+	int j=-1;
 	while(i<t.length()){
-		if(j==0||t[i]==t[j]){
+		if(j==-1||t[i]==t[j]){
 			++i;++j;next[i]=j;
 		}
 		else
