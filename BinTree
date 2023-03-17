@@ -1,0 +1,69 @@
+//二叉树基本操作 
+#include<iostream>
+#include<cstdlib>
+using namespace std;
+typedef struct Node{
+	char data;
+	struct Node *lchild,*rchild;
+}BiTNode,*BiTree;
+void CreateBiTree(BiTree &T){//函数中改变了T的值，新的T值作为二叉树的根节点地址；不能传入T，否则函数退出后T值未改变造成输出错误
+	char d;
+	cin>>d;
+	if(d=='#'){
+		T=NULL;
+	}
+	else{
+		T=(BiTree)malloc(sizeof(BiTNode));
+		if(!T){
+			return;
+		}
+		else{
+			T->data=d;
+			CreateBiTree(T->lchild);
+			CreateBiTree(T->rchild);
+		}
+	}
+}
+//前序遍历
+void PreOrderTraverse(BiTree T){
+	if(!T){
+		return;
+	}
+	else{
+		cout<<T->data<<" ";
+		PreOrderTraverse(T->lchild);
+		PreOrderTraverse(T->rchild);
+	}
+} 
+//中序遍历
+void InOrderTraverse(BiTree T){
+	if(!T){
+		return;
+	}
+	else{
+		InOrderTraverse(T->lchild);
+		cout<<T->data<<" ";
+		InOrderTraverse(T->rchild);
+	}
+}
+//后序遍历
+void PostOrderTraverse(BiTree T){
+	if(!T){
+		return;
+	}
+	else{
+		PostOrderTraverse(T->rchild);
+		PostOrderTraverse(T->lchild);
+		cout<<T->data<<" "; 
+	}
+} 
+int main(){
+	BiTree T=(BiTree)malloc(sizeof(BiTNode));
+	CreateBiTree(T);
+	PreOrderTraverse(T);
+	cout<<endl;
+	InOrderTraverse(T);
+	cout<<endl;
+	PostOrderTraverse(T);
+} 
+//ab#d##c##
